@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from typing import Optional
 from uuid import UUID, uuid4
+from decimal import Decimal
 from enum import Enum
 
 app = FastAPI(title="Cars API", description="API de carros para testes de frontend")
@@ -37,7 +38,7 @@ class CarBase(BaseModel):
     transmissao: TransmissionType = Field(..., examples=[TransmissionType.automatico])
     cor: str = Field(..., examples=["Prata"])
     quilometragem: int = Field(default=0, ge=0, examples=[15000])
-    preco: float = Field(..., gt=0, examples=[120000.00])
+    preco: Decimal = Field(..., gt=0, decimal_places=2, examples=[120000.00])
     image_url: Optional[str] = Field(default=None, examples=["https://example.com/carro.jpg"])
 
 class CarCreate(CarBase):
@@ -56,7 +57,7 @@ class CarPatch(BaseModel):
     transmissao: Optional[TransmissionType] = None
     cor: Optional[str] = None
     quilometragem: Optional[int] = Field(default=None, ge=0)
-    preco: Optional[float] = Field(default=None, gt=0)
+    preco: Optional[Decimal] = Field(default=None, gt=0, decimal_places=2)
     image_url: Optional[str] = None
 
 class Car(CarBase):

@@ -44,6 +44,14 @@ A API sobe em `http://localhost:8000`. Documentação interativa disponível em 
 - **combustivel**: `Gasolina`, `Etanol`, `Flex`, `Diesel`, `Elétrico`, `Híbrido`
 - **transmissao**: `Manual`, `Automático`, `CVT`
 
+## Tipos TypeScript
+
+Com a API rodando, gere os tipos automaticamente a partir do schema OpenAPI:
+
+```bash
+npx openapi-typescript http://localhost:8000/openapi.json -o src/types/api.ts
+```
+
 ## Instalação
 
 ```bash
